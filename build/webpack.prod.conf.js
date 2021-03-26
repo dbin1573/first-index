@@ -67,7 +67,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+
+        // 用于gitee page预览
+        removeAttributeQuotes: false
+
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
