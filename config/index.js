@@ -43,7 +43,9 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    
+    // 用于gitee page预览
+    assetsPublicPath: './',
 
     /**
      * Source Maps
