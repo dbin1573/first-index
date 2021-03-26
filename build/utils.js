@@ -47,7 +47,10 @@ exports.cssLoaders = function (options) {
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
-        fallback: 'vue-style-loader'
+        fallback: 'vue-style-loader',
+        
+        // gitee page解决icon问题
+        publicPath: './'
       })
     } else {
       return ['vue-style-loader'].concat(loaders)
