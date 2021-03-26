@@ -50,7 +50,7 @@ exports.cssLoaders = function (options) {
         fallback: 'vue-style-loader',
         
         // gitee page解决icon问题
-        publicPath: './'
+        publicPath: '../../'
       })
     } else {
       return ['vue-style-loader'].concat(loaders)
