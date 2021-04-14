@@ -1,0 +1,196 @@
+<html>
+    <body>
+
+        
+        <div class ="cssmenu" >
+			<ul>
+				<li><a href ="index.html">首页</a></li>
+				<li><a  href ="about.html">企业介绍</a></li>
+				<li><a  href ="noticeFrontList.jsp">公告</a></li>
+				<li><a href ="product.jsp">新闻</a></li>
+				<li><a  href ="product.html">产品介绍</a></li>
+				<li><a  href ="contact.html" class ="last">联系我们</a></li>
+			</ul>
+		</div>
+
+
+        <div>小视频:</div>
+        <video class="video-js vjs-default-skin video-js" controls="" preload="none" width="420" height="280"
+         src="https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4"></video>
+
+        <hr/>
+        <div contenteditable>192.168.102.135</div>
+        <form action="http://localhost:8080/api/partymember/import/030b9e46-b8ea-47ec-9feb-fb8c3eead801"
+         method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" ></input> 
+            <input type="submit" value="开始上传"></input></input>
+        </form>
+
+        <input type="text" value="hi" id="my-text"></input>
+
+        <div id="editor"></div>
+
+        
+
+
+        <textarea id="textarea" style="width: 386px; height: 260px"> 
+        </textarea> 
+        <!-- <input type="text" id="text" />  -->
+        <input type="button" value="插入" onclick="insertAtCursor(document.getElementById('textarea'))" /> 
+
+        <div id = "map-container" style="height: 100%; width: 100%;"></div>
+        
+    </body>
+    
+    <style>
+
+        #editor {
+            width: 1000px;
+        }
+
+        /*
+            通过浮动实现导航条
+        */
+        .cssmenu > ul{
+            /* 重点列表类型 */
+            list-style-type:none;
+            /* margin: 0; */
+            /* padding: 0; */
+            float:left;
+        }
+
+        .cssmenu {
+            overflow: hidden;
+        }
+
+        /* 实现横排 */
+        .cssmenu > ul >li{
+            float:left;
+            display:block;
+            margin:0 20px;
+        }
+
+        .cssmenu >ul >li >a{
+            font-weight: 800;
+            color: #630808;
+            /* 文字划线样式 */
+            text-decoration:none;
+        }
+
+    </style>
+
+    <!-- <script type="text/javascript">
+        window.init = function(){
+            var map = new AMap.Map('map-container', {
+            center:[117.000923,36.675807],
+            zoom:11
+            });
+        }
+    </script> -->
+    <!-- <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=95188e42559930a5e74ab31f82becfa9"></script> -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=69be460b8e9846c27a14aef4da660aa7"></script>
+    <!-- <script type="text/javascript">
+        var map = new AMap.Map('map-container', {
+        center:[36.6156071,36.675807],
+        zoom:11
+        });
+    </script> -->
+    <script type="text/javascript" >
+        var map = new AMap.Map('map-container',{
+            zoom:12,
+            resizeEnable: true
+            // center:[117.000923,36.675807],
+        });
+        AMap.plugin(['AMap.ToolBar','AMap.PlaceSearch'],function(){//异步加载插件
+            var toolbar = new AMap.ToolBar();
+            map.addControl(toolbar);
+            var PlaceSearch = new AMap.PlaceSearch();
+            map.addControl(PlaceSearch);
+            var driving = new AMap.Driving();
+            map.plugin(driving);
+        });
+
+        var marker = new AMap.Marker({
+            content: "hi",  // 自定义点标记覆盖物内容
+            position:  [36.675807, 117.000923], // 基点位置
+            offset: new AMap.Pixel(-17, -42) // 相对于基点的偏移位置
+        });
+
+        map.add(marker);
+        
+    </script>
+
+
+    <script>
+
+        (function(){
+            window.dbin={
+                name: '张洪彬',
+                print: () =>{
+                    console.log('hi')
+                }
+
+            }
+        })();
+
+    </script>
+
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"
+        ></script>
+        <script type="text/javascript">
+        const E = window.wangEditor
+        const editor = new E("#editor")
+        // 或者 const editor = new E(document.getElementById('div1'))
+        editor.create()
+
+
+
+
+async function insertAtCursor(myField) { 
+    await navigator.clipboard.readText()
+    .then(txt=> {
+        myValue = txt;
+    })
+
+    //IE 浏览器 
+    if (document.selection) { 
+        myField.focus(); 
+        sel = document.selection.createRange(); 
+        sel.text = myValue; 
+        sel.select(); 
+    } 
+    
+    //FireFox、Chrome等 
+    else if (myField.selectionStart || myField.selectionStart == '0') { 
+        var startPos = myField.selectionStart; 
+        var endPos = myField.selectionEnd; 
+        
+        // 保存滚动条 
+        var restoreTop = myField.scrollTop; 
+        myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length); 
+        
+        if (restoreTop > 0) { 
+            myField.scrollTop = restoreTop; 
+        } 
+        
+        myField.focus(); 
+        myField.selectionStart = startPos + myValue.length; 
+        myField.selectionEnd = startPos + myValue.length; 
+    } else { 
+        myField.value += myValue; 
+        myField.focus(); 
+    } 
+} 
+
+    </script>
+
+</html>
+
+
+
+
+
+
+
