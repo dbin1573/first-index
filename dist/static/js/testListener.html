@@ -1,0 +1,54 @@
+
+<html>
+    <input type="button" onclick="clickMyFun()" value="点我"></input>
+</html>
+<script>
+
+class SomeClass {
+
+  constructor() {
+    this.name = 'Something Good';
+  }
+
+    register() {
+        var that = this;
+        window.addEventListener('keydown', function(e) {return that.someMethod(e);});
+    }
+
+    clickFun() {
+        // 1.创建自定义事件
+        var event = document.createEvent("HTMLEvents");
+        // 2.初始化testEvent事件
+        event.initEvent("keydown", false, true);
+        // event.data = {"click":true};
+        // 3.触发自定义事件
+        window.dispatchEvent(event);
+    }
+
+    someMethod(e) {
+        alert('hi')
+        console.log(this.name);
+
+        switch(e.keyCode) {
+            case 5:
+                // some code here...
+                break;
+            case 6:
+                // some code here...
+                break;
+        }
+    }
+
+}
+
+// class
+var myObject = new SomeClass();
+myObject.register();
+
+function clickMyFun() {
+    myObject.clickFun();
+
+}
+
+
+</script>
