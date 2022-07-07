@@ -7,6 +7,9 @@
         </p>
         <el-input v-model="formData.url" @keydown.enter.native="handleKeydown()" placeholder=""></el-input>
         <el-image v-if="checkImage(this.formData.url)" style="width: 100%;" :src="formData.url"></el-image>
+        <audio :src="formData.url"></audio>
+        <!-- muted静音 autoplay才能使用自动播放 -->
+        <video v-if="checkVideo(this.formData.url)" :src="formData.url" style="width: 100%;" muted autoplay controls></video>
 
         <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" append-to-body close-on-click-modal>
             <span>
@@ -27,7 +30,9 @@ export default {
     },
     data() {
         return {
-            formData: {},
+            formData: {
+                url: "https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4"
+            },
             dialogVisible: false
         };
     },
@@ -42,7 +47,17 @@ export default {
                 return false
             }
             val = val.toLowerCase()
-            if (val.endsWith(".png") || val.endsWith(".jpg") || val.endsWith(".jpeg")
+            if (val.endsWith(".png") || val.endsWith(".jpg") || val.endsWith(".jpeg")) {
+                return true;                
+            }
+            return false
+        },
+        checkVideo(val) {
+            if (!val) {
+                return false
+            }
+            val = val.toLowerCase()
+            if (val.endsWith(".mp4")
             ) {
                 return true;                
             }
