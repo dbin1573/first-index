@@ -5,67 +5,52 @@
     <!--    <title>DBin-首页</title>-->
 
     <div class="content">
-      <img src="https://cn.bing.com/th?id=OHR.JabiruStork_ZH-CN0218761234_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
-           style="background: #2c3e50"
-           width='75%'/>
+      <img
+        src="https://cn.bing.com/th?id=OHR.JabiruStork_ZH-CN0218761234_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
+        style="background: #2c3e50"
+        width="75%"
+      />
     </div>
 
-
     <div class="side_top">
-
       <div class="head_top">
-
-
-        <img src="https://dbin-blob.github.io/img/avatar.jpg"/>
-
+        <img src="https://dbin-blob.github.io/img/avatar.jpg" />
       </div>
 
       <div class="head_menu">
-
         <div>
           <button @click="jump('csdn')">去我的csdn</button>
         </div>
         <div>
           <button @click="jump('blob')">去我的blob</button>
         </div>
-
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-
     jump(common) {
-
       switch (common) {
         case "csdn":
           //window.location.href = "https://blog.csdn.net/DBin1573"
-          window.open("https://blog.csdn.net/DBin1573")
+          window.open("https://blog.csdn.net/DBin1573");
           break;
         case "blob":
-          window.open("https://dbin-blob.github.io/")
+          window.open("https://dbin-blob.github.io/");
           break;
         default:
-          console.log("你发现了新大陆哟")
-
+          console.log("你发现了新大陆哟");
       }
-
-    },
-
-
+    }
   }
-}
-
+};
 </script>
 
 <style lang="scss">
 .about {
-
   & .content {
     & > img {
       height: 80%;
@@ -82,7 +67,6 @@ export default {
     background-color: #7c8e98;
     height: 100%;
     width: 300px;
-
 
     /*头像*/
     & .head_top {
@@ -111,12 +95,6 @@ export default {
         height: 100px;
       }
     }
-
-
   }
-
-
 }
-
-
 </style>

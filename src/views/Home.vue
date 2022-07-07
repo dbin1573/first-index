@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home headImg">
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
@@ -16,7 +16,7 @@ export default {
   },
 
   created() {
-      this.$notify({message: 'hi'});
+      this.$notify({message: 'Wellcome to dbin'});
 
   },
   methods: {
@@ -24,3 +24,8 @@ export default {
   }
 };
 </script>
+<style>
+    .headImg {
+        padding-top: 22px;
+    }
+</style>
