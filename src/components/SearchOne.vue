@@ -32,7 +32,7 @@
 </template>
 
 <script>
-const context = require.context("@/data", false, /\.json$/);
+const context = require.context("../../static/data", true, /\.json$/);
 const moduleData = context.keys().map((obj) => {
     return context(obj);
 });
@@ -47,9 +47,9 @@ export default {
     data() {
         return {
             formData: {
-                name:"音乐",
-                url: "http://iptar-file.oss-cn-hangzhou.aliyuncs.com/3fab0629-c882-489e-a1f2-8da3034f7fb4.mp3",
-                // url: "https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4",
+                // url:""
+                // url: "http://iptar-file.oss-cn-hangzhou.aliyuncs.com/3fab0629-c882-489e-a1f2-8da3034f7fb4.mp3",
+                url: "https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4",
             },
             restaurants: [],
             dialogVisible: false,

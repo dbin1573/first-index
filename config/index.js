@@ -42,9 +42,10 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
+    
+    // 静态资源输出到二级目录下
     assetsSubDirectory: 'static',
-
-    // 用于gitee page预览
+    // 用于gitee page预览  静态资源cdn地址
     assetsPublicPath: './',
 
     /**
