@@ -11,9 +11,10 @@
                 <span class="addr">{{ item.value }}</span>
             </template>
         </el-autocomplete>
+
+
         <!-- <el-input v-model="formData.url" @keydown.enter.native="handleKeydown()" placeholder=""></el-input> -->
         <el-image v-if="checkImage(formData.url)" style="width: 100%" :src="formData.url"></el-image>
-
         <!-- muted静音 autoplay才能使用自动播放 -->
         <video v-if="checkVideo(formData.url)" style="max-width: 100%" autoplay controls>
             <source :src="formData.url" :type="getVideoType(formData.url)" />
@@ -56,7 +57,7 @@ export default {
         };
     },
     mounted() {
-        this.restaurants = this.loadAll();
+        this.request()
     },
     methods: {
         handleSelect(item) {
@@ -85,6 +86,7 @@ export default {
                 return queryString.includes(value) || queryString.includes(name);
             };
         },
+        // 载入本地数据
         loadAll() {
             let restaurants = context.keys().map((obj) => {
                 return context(obj);
@@ -94,6 +96,20 @@ export default {
                 restaurantResults.push(...items);
             }
             return restaurantResults || [];
+        },
+        request(msg="") {
+            fetch("https://mock.apifox.cn/m1/978004-0-default/api/resource/movieList.json?page=" + msg)
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result)
+                    this.restaurants = result.data || []
+                    
+                })
+                .catch(error => {
+                    console.log('error', error)
+                    // 备用
+                    this.restaurants = this.loadAll();
+                });
         },
         handleKeydown() {
             this.dialogVisible = true;

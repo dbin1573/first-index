@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button onclick="test()" type="button">开始打印信息</button>
+    </body>
+</html>
+<script>
+     function test(){
+        console.log("hi")
+        
+        let resp =  asyncFun2()
+        
+        console.log(resp)
+
+        console.log("over...")
+        
+    }
+
+    function asyncFun(){
+        return new Promise(function(resolve, reject){
+            // 10秒后执行
+            setTimeout(function(){
+                resolve("promise");
+            },1000*3)
+
+        })
+    }
+    
+    async function asyncFun1(){
+        // 10秒后执行
+        i=1000*1000*500
+        while(i>0){
+            i--
+        }
+        return "promise"
+    }
+
+    async function asyncFun2(){
+        let resp = await asyncFun1()
+        console.log(resp)
+        return resp
+    }
+</script>
