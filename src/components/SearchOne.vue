@@ -73,14 +73,16 @@ export default {
          */
         changeUrl(val) {
             console.log(val);
-            this.handleFormData(val)
+            this.formData.url = val;
+            // this.handleFormData(val)
         },
         /**
          * 处理下拉框选中
          */
         handleSelect(item) {
             console.log("选中："+JSON.stringify(item));
-            this.formData = item;
+            this.formData.url = item.url;
+            this.formData.type = item.type;
             
             this.handleFormData(item.url, item.type)
         },
@@ -163,7 +165,6 @@ export default {
             }
 
             // this.list = result;
-            this.$set(this, "list", [])
             this.$set(this, "list", result)
 
             return true;
