@@ -74,7 +74,7 @@ export default {
         changeUrl(val) {
             console.log(val);
             this.formData.url = val;
-            // this.handleFormData(val)
+            this.handleFormData(val)
         },
         /**
          * 处理下拉框选中
