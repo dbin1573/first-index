@@ -4,23 +4,17 @@
         <h1>{{ msg }}</h1>
         <p>🔍嘻嘻🤭</p>
         <el-autocomplete style="width:100%" v-model="formData.url" :fetch-suggestions="querySearch" placeholder="请输入内容"
-            @select="handleSelect">
+            @select="handleSelect" @change="changeUrl" clearable>
             <i class="el-icon-s-promotion el-input__icon cursorhand" slot="prefix" @click="handleSelectItem"></i>
             <template slot-scope="{ item }">
                 <span class="name">{{ item.name }}</span> -
-                <span class="addr">{{ item.value }}</span>
+                <span class="addr">{{ item.url }}</span>
             </template>
         </el-autocomplete>
 
+        <ViewContent :formData="list"></ViewContent>
 
-        <!-- <el-input v-model="formData.url" @keydown.enter.native="handleKeydown()" placeholder=""></el-input> -->
-        <el-image v-if="checkImage(formData.url)" style="width: 100%" :src="formData.url"></el-image>
-        <!-- muted静音 autoplay才能使用自动播放 -->
-        <video v-if="checkVideo(formData.url)" style="max-width: 100%" autoplay controls>
-            <source :src="formData.url" :type="getVideoType(formData.url)" />
-        </video>
-
-        <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" append-to-body close-on-click-modal>
+        <!-- <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" append-to-body close-on-click-modal>
             <span>
                 <el-image v-if="checkImage(this.formData.url)" style="width: 100%; height: 100%" :src="formData.url">
                 </el-image>
@@ -28,7 +22,16 @@
             <span slot="footer" class="dialog-footer cursorhand" @click="dialogVisible = false">
                 hi dbin
             </span>
-        </el-dialog>
+        </el-dialog> -->
+        <!-- <div v-if="list"> -->
+        <!-- <div v-for="(url,index) in list" :key="index">
+            <el-image v-if="checkImage(url)" style="width: 100%" :src="url"></el-image>
+            <! -- muted静音 autoplay才能使用自动播放 -- >
+            <video v-if="checkVideo(url)" style="max-width: 100%" autoplay controls>
+                <source :src="url" :type="getVideoType(url)" />
+            </video>
+        </div> -->
+
     </div>
 </template>
 
@@ -40,17 +43,22 @@ const moduleData = context.keys().map((obj) => {
 
 console.log("加载json: \n" + JSON.stringify(moduleData));
 
+import ViewContent from "@/components/ViewContent.vue";
 export default {
+    components: {
+        ViewContent
+    },
     name: "HelloWorld",
     props: {
         msg: String,
     },
     data() {
         return {
+            list:[],
             formData: {
                 // url:""
                 // url: "http://iptar-file.oss-cn-hangzhou.aliyuncs.com/3fab0629-c882-489e-a1f2-8da3034f7fb4.mp3",
-                url: "https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4",
+                // url: "https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4",
             },
             restaurants: [],
             dialogVisible: false,
@@ -60,15 +68,32 @@ export default {
         this.request()
     },
     methods: {
+        /**
+         * 输入搜索内容
+         */
+        changeUrl(val) {
+            console.log(val);
+            this.handleFormData(val)
+        },
+        /**
+         * 处理下拉框选中
+         */
         handleSelect(item) {
-            console.log(item);
-            this.formData.url = item.value;
-            this.formData.name = item.name;
-        },
-        handleSelectItem() {
+            console.log("选中："+JSON.stringify(item));
+            this.formData = item;
             
-            // this.formData.url = item.value;
+            this.handleFormData(item.url, item.type)
         },
+        /**
+         * 点击搜索图标
+         */
+        handleSelectItem() {
+            let data = this.formData
+            this.handleFormData(data.url, data.type)
+        },
+        /**
+         * 搜索
+         */
         querySearch(queryString, callback) {
             var restaurants = this.restaurants;
             var results = queryString
@@ -77,13 +102,16 @@ export default {
             // 调用 callback 返回建议列表的数据
             callback(results);
         },
+        /**
+         * 过滤
+         */
         createFilter(queryString) {
             return (restaurant) => {
                 let name = restaurant.name.toLowerCase();
-                let value = restaurant.value.toLowerCase();
+                let url = restaurant.url.toLowerCase();
                 queryString = queryString.toLowerCase()
-                // return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-                return queryString.includes(value) || queryString.includes(name);
+                // return (restaurant.url.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+                return queryString.includes(url) || queryString.includes(name);
             };
         },
         // 载入本地数据
@@ -97,6 +125,9 @@ export default {
             }
             return restaurantResults || [];
         },
+        /**
+         * 请求远程数据
+         */
         request(msg="") {
             fetch("https://mock.apifox.cn/m1/978004-0-default/api/resource/movieList.json?page=" + msg)
                 .then(response => response.json())
@@ -113,6 +144,29 @@ export default {
         },
         handleKeydown() {
             this.dialogVisible = true;
+        },
+
+        handleFormData(url, type) {
+
+            if (!url) {
+                // this.display = false
+                this.$set(this, "list", [])
+                return false;
+            }
+
+            let val = url.replace('\'', '\"') || null;
+            let result = ''
+            try {
+                result = JSON.parse(val)
+            } catch (e) {
+                result = val.split(',')
+            }
+
+            // this.list = result;
+            this.$set(this, "list", [])
+            this.$set(this, "list", result)
+
+            return true;
         },
         // 检查图片类型
         checkImage(val) {
@@ -151,6 +205,7 @@ export default {
                 return "audio/mpeg";
             }
         },
+        
     },
 };
 </script>
