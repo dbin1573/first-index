@@ -14,10 +14,11 @@
         </div>
 
         <div>小视频:</div>
-        <video class="video-js vjs-default-skin video-js" controls autoplay preload="none" width="420" height="280"
+        <video class="video-js vjs-default-skin video-js" muted controls autoplay preload="none" width="420"
+            style="width=100% max-width:280px"
             src="https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4"></video>
 
-        <hr />
+        <br/>
         <!-- <div contenteditable>192.168.102.135</div> -->
         <!-- <form action="http://localhost:8080/api/partymember/import/030b9e46-b8ea-47ec-9feb-fb8c3eead801" method="POST" enctype="multipart/form-data"> -->
         <!-- <input type="file" name="file" ></input>  -->
@@ -31,9 +32,9 @@
         <textarea id="textarea" v-model="msgText" style="width: 386px; height: 260px">
         </textarea>
 
-        <input type="button" value="留言" @click="sendMsg(msgText)" />
-        <input type="button" value="插入" @click="insertAtCursor(document.getElementById('textarea'))" />
-
+        <!-- <input type="button" value="粘贴" @click="insertAtCursor()" /> -->
+        <el-button type="primary" @click="insertAtCursor()">粘贴</el-button>
+        <hr />
         <WangEditor />
         <hr />
         <AMap />
@@ -62,48 +63,10 @@ export default {
         }
     },
     methods: {
-        sendMsg(msg="msg") {
-            var axios = require('axios');
-            var data = '{"msgtype": "text","text": {"content": "留言：'+msg+'"}}';
-            let token = 'de5d106b6f5cc4b0fae16ddf01481c092d9b7ce1c656bc4d50de49ba87b2b018';
-            var config = {
-                method: 'POST',
-                url: 'https://oapi.dingtalk.com/robot/send?access_token='+token,
-                data: data,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            };
-
-            axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            var raw = data;
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-
-            fetch("https://oapi.dingtalk.com/robot/send?access_token="+token, requestOptions)
-                .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
-
-
-
-        },
-        async insertAtCursor(myField) {
+      
+        async insertAtCursor() {
+            let myField = document.getElementById('textarea')
+            let myValue = ""
             await navigator.clipboard.readText()
                 .then(txt => {
                     myValue = txt;

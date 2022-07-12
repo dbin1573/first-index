@@ -70,7 +70,9 @@ window.dbinUtil = {
 </style>
 
 <style type="text/css">
-
+    #nav {
+        maxwidth: 100%;
+    }
         @keyframes notify {
             from {
                 top: -50px
@@ -102,5 +104,6 @@ window.dbinUtil = {
             display: none;
 
         }
-    </style>
+    
+</style>
 
