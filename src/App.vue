@@ -3,7 +3,8 @@
     <div id="head">
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link> |
-        <router-link to="/Three">Three</router-link>
+        <router-link to="/Three">Three</router-link> |
+        <router-link to="/login">login</router-link>
     </div>
     <router-view/>
     <div id="notify"></div>
@@ -71,39 +72,38 @@ window.dbinUtil = {
 
 <style type="text/css">
     #nav {
-        maxwidth: 100%;
+        max-width: 100%;
     }
-        @keyframes notify {
-            from {
-                top: -50px
+/*     
+    @keyframes notify {
+        from {
+            top: -50px
 
-            };
-            to {
-                top: 50px
-            };
-        }
+        };
+        to {
+            top: 50px
+        };
+    } */
 
-        #notify
-        {
-            position: absolute;
-            background: rgb(173, 226, 93);
-            top: 30px;
-            left: calc( 50% - 200px );
-            height: 50px;
-            width: 300px;
+    #notify {
+        position: absolute;
+        background: rgb(173, 226, 93);
+        top: 30px;
+        left: calc( 50% - 200px );
+        height: 50px;
+        width: 300px;
 
-            border-radius: 5px;
-            text-align: center;
-            vertical-align: middle;
+        border-radius: 5px;
+        text-align: center;
+        vertical-align: middle;
 
-            font-weight: bold;
+        font-weight: bold;
 
-            /* animation-duration: 2s; */
-            animation: notify 1s;
-            -webkit-animation: notify 1s;
-            display: none;
+        /* animation-duration: 2s; */
+        animation: notify 1s;
+        -webkit-animation: notify 1s;
+        display: none;
 
-        }
-    
+    }
 </style>
 

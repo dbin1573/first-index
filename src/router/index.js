@@ -8,25 +8,36 @@ Vue.use(Router)
 Vue.use(ElementUI)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'About',
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/About.vue')
-    },
-    {
-      path: '/Three',
-      name: 'Three',
-        component: () => import('@/views/Three.vue')
-    },
+    routes: [
+        {
+            path: '/',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/about',
+            name: 'About',
+            // which is lazy-loaded when the route is visited.
+            component: () => import('../views/About.vue')
+        },
+        {
+            path: '/Three',
+            name: 'Three',
+            component: () => import('@/views/Three.vue')
+        },
+        {
+            // path: '/sys',
+            // name: 'sys',
+            // children: [
+            //     {
+                    path: '/login',
+                    name: 'login',
+                    component: () => import('@/views/sys/Login.vue')
+            //     }
+            // ]
+        }
 
-  ]
+    ]
 })
 
 

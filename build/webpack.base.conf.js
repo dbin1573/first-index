@@ -23,6 +23,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
+    // 绝对路径
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
