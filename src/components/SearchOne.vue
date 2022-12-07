@@ -161,7 +161,15 @@ export default {
             try {
                 result = JSON.parse(val)
             } catch (e) {
-                result = val.split(',')
+                if (val.includes(",")) {
+                    result = val.split(',')
+                } else if (val.includes("，")) {
+                    result = val.split('，')
+                } else if (val.includes(" ")) {
+                    result = val.split(' ')
+                } else {
+                    result = [val];
+                }
             }
 
             // this.list = result;
