@@ -3,11 +3,11 @@
         <!--    <link href="/favicon.ico" rel="icon" type="image/x-icon"/>-->
 
         <!--    <title>DBin-首页</title>-->
-
         <div class="content" @click="drawer = !drawer">
-            <img src="https://cn.bing.com/th?id=OHR.JabiruStork_ZH-CN0218761234_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
-                style="background: #2c3e50" width="75%" />
+            <el-button>我的信息</el-button>
+
         </div>
+        <ImageCut></ImageCut>
 
         <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
             <div class="side_top">
@@ -33,10 +33,14 @@
 </template>
 
 <script>
+import ImageCut from "@/components/ImageCut.vue";
 export default {
+    components: {
+        ImageCut
+    }, 
     data() {
         return {
-            drawer: true
+            drawer: false
         }
     },
     methods: {

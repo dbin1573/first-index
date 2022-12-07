@@ -55,7 +55,8 @@ window.dbinUtil = {
   color: #2c3e50;
 }
 #head {
-    position: absolute;
+    // position: absolute;
+    
 }
 #nav {
 

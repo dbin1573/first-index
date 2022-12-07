@@ -14,24 +14,6 @@
 
         <ViewContent :formData="list"></ViewContent>
 
-        <!-- <el-dialog title="提示" :visible.sync="dialogVisible" width="60%" append-to-body close-on-click-modal>
-            <span>
-                <el-image v-if="checkImage(this.formData.url)" style="width: 100%; height: 100%" :src="formData.url">
-                </el-image>
-            </span>
-            <span slot="footer" class="dialog-footer cursorhand" @click="dialogVisible = false">
-                hi dbin
-            </span>
-        </el-dialog> -->
-        <!-- <div v-if="list"> -->
-        <!-- <div v-for="(url,index) in list" :key="index">
-            <el-image v-if="checkImage(url)" style="width: 100%" :src="url"></el-image>
-            <! -- muted静音 autoplay才能使用自动播放 -- >
-            <video v-if="checkVideo(url)" style="max-width: 100%" autoplay controls>
-                <source :src="url" :type="getVideoType(url)" />
-            </video>
-        </div> -->
-
     </div>
 </template>
 
