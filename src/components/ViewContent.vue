@@ -6,10 +6,10 @@
             <el-image v-if="checkImage(url)" style="width: 100%" :src="url"></el-image>
             <!-- muted静音 autoplay才能使用自动播放 -->
             <video v-if="checkVideo(url)" style="max-width: 100%" autoplay controls>
-                <source :src="url" :type="getVideoType(url)" />
+              <source :src="url" :type="getVideoType(url)" />
             </video>
         </div>
-
+          
     </div>
 </template>
 
@@ -42,7 +42,8 @@ export default {
             if (
                 val.endsWith(".png") ||
                 val.endsWith(".jpg") ||
-                val.endsWith(".jpeg")
+                val.endsWith(".jpeg") ||
+                val.startsWith("data:image")
             ) {
                 return true;
             }

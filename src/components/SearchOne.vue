@@ -143,7 +143,9 @@ export default {
             try {
                 result = JSON.parse(val)
             } catch (e) {
-                if (val.includes(",")) {
+                if (val.startsWith("data:image")) {
+                    result = [val];
+                } else if (val.includes(",")) {
                     result = val.split(',')
                 } else if (val.includes("，")) {
                     result = val.split('，')
