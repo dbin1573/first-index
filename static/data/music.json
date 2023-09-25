@@ -8,5 +8,10 @@
         "name": "福生",
         "type": "video/mp4",
         "url": "https://v.dyjyzyk.dtdjzx.gov.cn/resource-oss/resource/030b9e46-b8ea-47ec-9feb-fb8c3eead801/aa0bb0000215a379846b325e08baaa88-1611646939387-415551998.mp4"
+    },
+    {
+        "name": "小视频",
+        "type": "video/mp4",
+        "url": "http://habit-file-oss.oss-cn-hangzhou.aliyuncs.com//2022-12-09/66S7kjecag0BOrudFbHP22hLRXH0Jyo5.mp4"
     }
 ]
